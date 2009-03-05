@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090304005128) do
+ActiveRecord::Schema.define(:version => 20090304153940) do
 
   create_table "railers", :force => true do |t|
     t.string   "name"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20090304005128) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "photo_url"
   end
 
 end
