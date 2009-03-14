@@ -4,13 +4,14 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Manager do
 
-  context "should update the railers database" do
+  context "on railers update" do
   
     before :each do
       map "person/13580-diego-carrion", "13580-diego-carrion"
+      Railer.stub!(:delete_all).stub!('create!')
     end
   
-    it "should update the railers database" do
+    it "should create a record for each railer" do
       map "browse/people/country/Brazil", "Brazil"
       map "person/13522-123", "13522-123"
       Railer.should_receive('create!').exactly(2).times
@@ -23,6 +24,12 @@ describe Manager do
                                             :url => 'http://workingwithrails.com/person/13580-diego-carrion',
                                             :city => 'São Paulo',
                                             :email => 'dc.rec1@gmail.com')
+      Manager.update_railers
+    end
+    
+    it "should clean the database first" do
+      Railer.should_receive(:delete_all).ordered
+      Kernel.stub!(:open).and_return('')
       Manager.update_railers
     end
           

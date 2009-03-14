@@ -4,6 +4,7 @@ require 'cgi'
 class Manager
 
   def self.update_railers
+    Railer.delete_all
     h = Hpricot(Kernel.open("http://workingwithrails.com/browse/people/country/Brazil"))
     h.search(".entry-list li").each do |li|
       a = li.search('a')
