@@ -1,0 +1,2 @@
+class RailersController < ApplicationController
+end
