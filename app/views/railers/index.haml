@@ -1,0 +1,12 @@
+%html
+  %head
+    = stylesheet_link_tag 'main'
+  %body
+    .content
+      - for railer in @railers do
+        .railer
+          %a{:href => railer.url}
+            %img{:src => railer.photo_url}
+          %br
+          %a{:href => "mailto:#{railer.email}"}
+            =railer.name

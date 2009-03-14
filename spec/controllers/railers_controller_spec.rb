@@ -6,7 +6,7 @@ describe RailersController do
     
     it "should paginate 15 railers by the name" do
       page = '4'
-      Railer.should_receive(:paginate).with(:size => 15, :order => 'name', :page => page)
+      Railer.should_receive(:paginate).with(:per_page => 15, :order => 'name', :page => page)
       get 'index', :page => page
     end
     
