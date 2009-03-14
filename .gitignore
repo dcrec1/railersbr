@@ -2,4 +2,4 @@ log
 tmp
 config/database.yml
 db/*.sqlite3
-vendor
+vendor/*
