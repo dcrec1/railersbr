@@ -7,13 +7,13 @@ describe Manager do
   context "on railers update" do
   
     before :each do
+      map "person/13522-123", "13522-123"
       map "person/13580-diego-carrion", "13580-diego-carrion"
       Railer.stub!(:delete_all).stub!('create!')
     end
   
     it "should create a record for each railer" do
       map "browse/people/country/Brazil", "Brazil"
-      map "person/13522-123", "13522-123"
       Railer.should_receive('create!').exactly(2).times
       Manager.update_railers
     end
@@ -30,6 +30,14 @@ describe Manager do
     it "should clean the database first" do
       Railer.should_receive(:delete_all).ordered
       Kernel.stub!(:open).and_return('')
+      Manager.update_railers
+    end
+    
+    it "should fix Sao Paulo city to São Paulo" do
+      map "browse/people/country/Brazil", "Brazil"
+      Railer.should_receive('create!') do |map|
+        map[:city].should eql('São Paulo')
+      end.exactly(2).times
       Manager.update_railers
     end
           

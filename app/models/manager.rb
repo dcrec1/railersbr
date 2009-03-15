@@ -12,17 +12,15 @@ class Manager
       email = ''
       Hpricot(Kernel.open(url)).search("script") do |script|
         inner_text = script.inner_text
-        if inner_text.include?("eval(unescape")
-          inner_text.scan(/eval\(unescape\(\'(.+)\'/) do |str|
-            email = CGI.unescape(str.first).scan(/.+href=\"(.+)\".+/).first.first
-          end
-        end
+        inner_text.scan(/eval\(unescape\(\'(.+)\'/) do |str|
+          email = CGI.unescape(str.first).scan(/.+href=\"(.+)\".+/).first.first
+        end if inner_text.include?("eval(unescape")
       end
       city = (li.search('span').inner_text.split(',')[2] || '').lstrip
       Railer.create!(:name => a.inner_text,
                      :email => email,
                      :url => url,
-                     :city => city)
+                     :city => city.gsub('Sao Paulo', 'São Paulo'))
     end
   end
   

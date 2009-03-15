@@ -3,6 +3,11 @@
     = stylesheet_link_tag 'main'
   %body
     .content
+      - form_tag request.path, :method => 'get' do
+        - content_tag :label do
+          Cidade:
+          = text_field_tag :city, params[:city]
+        = submit_tag 'Filtrar'  
       - for railer in @railers do
         .railer
           %a{:href => railer.url}
@@ -10,3 +15,6 @@
           %br
           %a{:href => "mailto:#{railer.email}"}
             =railer.name
+          %br
+          = railer.city.empty? ? " - " : railer.city
+      = will_paginate @railers
