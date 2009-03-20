@@ -17,4 +17,15 @@ describe Railer do
     railer.valid?
     railer.photo_url.should be_nil
   end
+
+  it "should contact a list of users specified by id" do
+    msg = "work with me"
+    emails = ["tic@x.com", "tac@x.com", "toe@x.com"]
+    ids = [1,5,7]
+    railers = []
+    emails.each { |email| railers << Railer.new(:email => email) }
+    Railer.stub!(:find).with(ids).and_return(railers)
+    RailerMailer.should_receive(:deliver_message).with(msg, emails)
+    Railer.contact(ids, msg)
+  end
 end

@@ -4,7 +4,6 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'spec'
 require 'spec/rails'
-require "email_spec/helpers"
 require "email_spec/matchers"
 require 'digest/md5'
 
@@ -16,7 +15,6 @@ Spec::Runner.configure do |config|
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
 
-  config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
 
   # == Fixtures
