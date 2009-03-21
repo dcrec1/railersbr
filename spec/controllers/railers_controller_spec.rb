@@ -29,5 +29,17 @@ describe RailersController do
     end
     
   end
+  
+  context "routes" do
+    
+    it "should map root to index action" do
+      params_from(:get, "/").should == {:controller => "railers", :action => "index"}
+    end
+    
+    it "should map POST contact to contact action" do
+      params_from(:post, "/railers/contact").should == {:controller => "railers", :action => "contact"}
+    end
+    
+  end
 
 end
