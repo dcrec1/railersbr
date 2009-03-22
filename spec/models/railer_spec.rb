@@ -18,14 +18,4 @@ describe Railer do
     railer.photo_url.should be_nil
   end
 
-  it "should contact a list of users specified by a place" do
-    msg = "work with me"
-    emails = ["tic@x.com", "tac@x.com", "toe@x.com"]
-    place = "Mars"
-    railers = []
-    emails.each { |email| railers << Railer.new(:email => email) }
-    Railer.stub!(:find).with(:conditions => ['city LIKE ?', "%#{place}%"]).and_return(railers)
-    RailerMailer.should_receive(:deliver_message).with(msg, emails)
-    Railer.contact_from(place, msg)
-  end
 end

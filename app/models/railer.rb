@@ -7,8 +7,4 @@ class Railer < ActiveRecord::Base
     r.photo_url = "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(r.email)}?s=150" unless r.email.nil?
   end
 
-  def self.contact_from(place, message)
-    emails = find(:conditions => ['city LIKE ?', "%#{place}%"]).collect(&:email)
-    RailerMailer.deliver_message(message, emails)
-  end
 end

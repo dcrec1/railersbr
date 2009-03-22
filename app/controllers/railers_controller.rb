@@ -8,4 +8,9 @@ class RailersController < ApplicationController
                                :conditions => ['city LIKE ?', "%#{params[:city]}%"]
   end
   
+  def contact
+    RailerMailer.deliver_message(params)
+    render :file => :nothing
+  end
+  
 end

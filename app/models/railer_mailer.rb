@@ -1,11 +1,11 @@
 class RailerMailer < ActionMailer::Base
 
-  def message(message, users)  
-    recipients users
+  def message(opts)  
+    recipients Railer.all(:conditions => ['city LIKE ? AND email != ?', opts[:city], ""]).collect(&:email)    
     from "noreply@mouseoverstudio.com"  
-    subject "Contato mediante RailersBR"  
+    subject opts[:subject]
     sent_on Time.now
-    body :message => message
+    body :message => opts[:message]
   end   
 
 end

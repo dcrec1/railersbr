@@ -30,6 +30,18 @@ describe RailersController do
     
   end
   
+  context "responding to POST contact" do
+    
+    it "should contact railers from a given place" do
+      subject = "MouseOver Studio wants YOU!"
+      body = "Came work with us. Send us your resumee at me@you.com"
+      city = 'Saturn'
+      RailerMailer.should_receive(:deliver_message).with(hash_including(:city => city, :subject => subject, :body => body))
+      post 'contact', :city => city, :subject => subject, :body => body
+    end
+    
+  end
+  
   context "routes" do
     
     it "should map root to index action" do
