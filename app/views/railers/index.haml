@@ -7,7 +7,9 @@
         - content_tag :label do
           Cidade:
           = text_field_tag :city, params[:city]
-        = submit_tag 'Filtrar'  
+        = submit_tag 'Filtrar'
+      - form_tag contact_railers_path do
+        = submit_tag 'Email'
       - for railer in @railers do
         .railer
           %a{:href => railer.url}
