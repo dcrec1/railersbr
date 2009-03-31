@@ -32,14 +32,6 @@ describe Manager do
       Kernel.stub!(:open).and_return('')
       Manager.update_railers
     end
-    
-    it "should fix Sao Paulo city to São Paulo" do
-      map "browse/people/country/Brazil", "Brazil"
-      Railer.should_receive('create!') do |map|
-        map[:city].should eql('São Paulo')
-      end.exactly(2).times
-      Manager.update_railers
-    end
           
     def map(url, file)
       url = "http://workingwithrails.com/#{url}"

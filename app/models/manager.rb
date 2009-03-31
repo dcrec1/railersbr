@@ -20,8 +20,15 @@ class Manager
       Railer.create!(:name => a.inner_text,
                      :email => email,
                      :url => url,
-                     :city => city.gsub('Sao Paulo', 'São Paulo'))
+                     :city => fix(city))
     end
+  end
+  
+  private
+  
+  def self.fix(city)
+    #city.gsub(/[Ss]ao [Pp]aulo/, 'São Paulo')
+    city
   end
   
 end
