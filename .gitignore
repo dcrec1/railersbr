@@ -3,5 +3,7 @@ tmp
 config/database.yml
 db/*.sqlite3
 config/initializers/mail.rb
+config/database.locaweb.yml
+config/deploy.rb
 vendor/rails
 coverage
