@@ -15,8 +15,7 @@
           %a{:href => railer.url}
             %img{:src => railer.photo_url}
           %br
-          %a{:href => "mailto:#{railer.email}"}
-            =railer.name
+          %a{:href => "mailto:#{railer.email}"}= railer.name
           %br
           = railer.city.empty? ? " - " : railer.city
       = will_paginate @railers

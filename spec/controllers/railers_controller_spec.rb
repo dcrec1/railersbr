@@ -3,6 +3,10 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe RailersController do
 
   context "responding to GET index" do
+  
+    before :each do 
+      Railer.stub!(:paginate)
+    end
     
     it "should paginate 15 railers by the name" do
       page = '4'
@@ -28,6 +32,11 @@ describe RailersController do
       get 'index'
     end
     
+    it "should assign the searched location as @location" do
+      city = "asfas"
+      get :index, :city => city
+      assigns[:city].should eql(city)
+    end
   end
   
   context "responding to POST contact" do
