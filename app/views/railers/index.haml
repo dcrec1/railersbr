@@ -6,9 +6,10 @@
       - form_tag request.path, :method => 'get' do
         - content_tag :label do
           Cidade:
-          = text_field_tag :city, params[:city]
+          = text_field_tag :city, @city
         = submit_tag 'Filtrar'
       - form_tag contact_railers_path do
+        = hidden_field_tag :city, @city
         = submit_tag 'Email'
       - for railer in @railers do
         .railer
